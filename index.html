@@ -3,77 +3,161 @@
 <head>
     <title>IndexSwapy</title>
     <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-hover: #1d4ed8;
+            --background-color: #f8fafc;
+            --text-color: #1e293b;
+            --border-color: #e2e8f0;
+            --error-color: #ef4444;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            max-width: 1000px;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 2rem;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.5;
         }
+
+        h1 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        h2 {
+            color: var(--text-color);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
         .converter-section {
-            margin: 20px 0;
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
         }
+
+        .converter-section:hover {
+            transform: translateY(-2px);
+        }
+
         .input-group {
-            margin: 10px 0;
+            margin: 1rem 0;
         }
+
         textarea {
             width: 100%;
-            padding: 8px;
-            margin: 10px 0;
+            padding: 1rem;
+            margin: 0.5rem 0;
             height: 100px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.2s ease;
+            resize: vertical;
         }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
         button {
-            padding: 8px 16px;
-            background-color: #4CAF50;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--primary-color);
             color: white;
             border: none;
-            border-radius: 4px;
+            border-radius: 8px;
             cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: background-color 0.2s ease;
         }
+
         button:hover {
-            background-color: #45a049;
+            background-color: var(--primary-hover);
         }
+
         .result {
-            margin-top: 10px;
-            padding: 10px;
-            background-color: #f8f8f8;
-            border-radius: 4px;
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: white;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
         }
+
         .error {
-            color: red;
-            margin-top: 10px;
+            color: var(--error-color);
+            margin-top: 0.5rem;
+            padding: 0.75rem;
+            background-color: #fee2e2;
+            border-radius: 8px;
+            font-size: 0.9rem;
         }
+
         .last-updated {
-            font-size: 0.8em;
-            color: #666;
-            margin-top: 5px;
+            font-size: 0.875rem;
+            color: #64748b;
+            margin-top: 1rem;
+            text-align: center;
         }
+
         table {
             width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-top: 1rem;
+            border-radius: 8px;
+            overflow: hidden;
         }
+
         th, td {
-            padding: 8px;
+            padding: 1rem;
             text-align: left;
-            border-bottom: 1px solid #ddd;
+            border-bottom: 1px solid var(--border-color);
         }
+
         th {
-            background-color: #f2f2f2;
+            background-color: #f1f5f9;
+            font-weight: 600;
+            color: var(--text-color);
         }
+
         tr:hover {
-            background-color: #f5f5f5;
+            background-color: #f8fafc;
         }
+
         .input-description {
-            font-size: 0.9em;
-            color: #666;
-            margin-top: 5px;
+            font-size: 0.875rem;
+            color: #64748b;
+            margin-top: 0.5rem;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem;
+            color: #64748b;
+            border-top: 1px solid var(--border-color);
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+        }
+
+        footer small {
+            font-size: 0.875rem;
         }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <h1>IndexSwapy</h1>
@@ -200,7 +284,7 @@
 
     <div class="last-updated" id="lastUpdated">Last updated: Never</div>
 
-    <footer style="text-align: center; margin-top: 20px; padding: 20px; color: #666;">
+    <footer>
         <p>IndexSwap - A free tool for financial instrument conversion</p>
         <p><small>Version 1.0.0</small></p>
     </footer>
@@ -217,20 +301,20 @@
 
         // Parse input values from textarea
         function parseInputValues(inputText) {
-            // Split by newlines first
+            if (!inputText.trim()) {
+                return [];
+            }
+            
             return inputText
                 .split('\n')
                 .flatMap(line => {
-                    // For each line, split by dashes and handle each part
                     return line.split('-').flatMap(part => {
-                        // Clean up the part and split by commas and/or spaces
                         const numbers = part
                             .trim()
                             .split(/[,\s]+/)
                             .map(num => num.trim())
                             .filter(num => num !== '')
                             .map(num => {
-                                // Remove any non-numeric characters except decimal point
                                 const cleanNum = num.replace(/[^\d.-]/g, '');
                                 return parseFloat(cleanNum);
                             });
@@ -252,7 +336,10 @@
                     throw new Error('Please enter at least one valid number');
                 }
                 
-                tableBody.innerHTML = '';
+                if (tableBody) {
+                    tableBody.innerHTML = '';
+                }
+                
                 resultDiv.className = 'result';
                 
                 for (const value of values) {
