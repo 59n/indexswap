@@ -1,12 +1,24 @@
 {
-  "name": "spyconverter",
+  "name": "indexswap",
   "version": "1.0.0",
-  "description": "A module to convert QQQ to NDX values using spyconverter.com",
-  "main": "spyconverter.js",
+  "description": "Financial instrument converter for NDX, QQQ, NQ, SPY, and ES",
+  "main": "src/spyconverter.js",
   "scripts": {
-    "test": "node test-spyconverter.js"
+    "test": "node test/test-spyconverter.js",
+    "start": "serve ."
   },
+  "keywords": [
+    "finance",
+    "converter",
+    "NDX",
+    "QQQ",
+    "NQ",
+    "SPY",
+    "ES"
+  ],
+  "author": "59n",
+  "license": "MIT",
   "dependencies": {
-    "puppeteer": "^21.0.0"
+    "serve": "^14.0.0"
   }
 } 

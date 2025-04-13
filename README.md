@@ -1,22 +1,68 @@
-# SpyConverter
+# IndexSwap
 
-A simple web-based tool to convert between different financial instrument values:
-- QQQ ↔ NDX
-- QQQ ↔ NQ
-- SPY ↔ ES
+A powerful financial instrument converter for NDX, QQQ, NQ, SPY, and ES values. Convert between different index products with real-time ratios.
 
 ## Features
+
+- Convert between multiple financial instruments:
+  - QQQ ↔ NDX
+  - QQQ ↔ NQ
+  - SPY ↔ ES
+- Real-time conversion ratios
 - Multiple input formats (comma, space, or dash separated)
-- Real-time conversions
 - Clean, responsive interface
 - Automatic ratio updates
 
 ## Usage
-Simply visit: [YOUR_GITHUB_USERNAME.github.io/spyconverter](https://YOUR_GITHUB_USERNAME.github.io/spyconverter)
 
-Or run locally:
-1. Clone this repository
-2. Open `index.html` in your browser
+Visit: [indexswap.netlify.app](https://indexswap.netlify.app)
 
-## Development
-The converter uses the latest conversion ratios from the official API endpoint. 
+### Input Formats
+
+The converter accepts various input formats:
+```
+450, 449, 448           # Comma separated
+450 449 448             # Space separated
+450-449-448             # Dash separated
+450, 449 - 448         # Mixed format
+```
+
+## Local Development
+
+1. Clone the repository:
+```bash
+git clone https://github.com/YOUR-USERNAME/indexswap.git
+cd indexswap
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Start local server:
+```bash
+npm start
+```
+
+4. Run tests:
+```bash
+npm test
+```
+
+## Project Structure
+
+```
+indexswap/
+├── src/               # Source files
+│   └── spyconverter.js
+├── test/              # Test files
+│   └── test-spyconverter.js
+├── index.html         # Main application
+├── netlify.toml       # Netlify configuration
+└── package.json       # Project configuration
+```
+
+## License
+
+MIT License 
