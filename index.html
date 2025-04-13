@@ -336,15 +336,41 @@
                     throw new Error('Please enter at least one valid number');
                 }
                 
-                if (tableBody) {
-                    tableBody.innerHTML = '';
+                // Clear previous results
+                resultDiv.innerHTML = '';
+                
+                // Create new table if it doesn't exist
+                let table = document.getElementById(tableId);
+                if (!table) {
+                    table = document.createElement('table');
+                    table.id = tableId;
+                    const thead = document.createElement('thead');
+                    const headerRow = document.createElement('tr');
+                    const headers = inputId.includes('To') ? inputId.split('To') : ['Input', 'Output'];
+                    headers.forEach(header => {
+                        const th = document.createElement('th');
+                        th.textContent = header.replace('Input', '').trim() + ' Value';
+                        headerRow.appendChild(th);
+                    });
+                    thead.appendChild(headerRow);
+                    table.appendChild(thead);
+                    resultDiv.appendChild(table);
                 }
                 
-                resultDiv.className = 'result';
+                // Get or create table body
+                let tbody = table.querySelector('tbody');
+                if (!tbody) {
+                    tbody = document.createElement('tbody');
+                    table.appendChild(tbody);
+                }
                 
+                // Clear existing rows
+                tbody.innerHTML = '';
+                
+                // Add new rows
                 for (const value of values) {
                     const result = await converter[conversionMethod](value);
-                    const row = tableBody.insertRow();
+                    const row = tbody.insertRow();
                     row.insertCell(0).textContent = value.toFixed(2);
                     row.insertCell(1).textContent = result.toFixed(2);
                 }
@@ -352,7 +378,6 @@
                 updateLastUpdated();
             } catch (error) {
                 resultDiv.innerHTML = `<div class="error">Error: ${error.message}</div>`;
-                resultDiv.className = 'result error';
             }
         }
 
