@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SpyConverter Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .converter-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .input-group {
+            margin: 10px 0;
+        }
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin: 10px 0;
+            height: 100px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #f8f8f8;
+            border-radius: 4px;
+        }
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+        .last-updated {
+            font-size: 0.8em;
+            color: #666;
+            margin-top: 5px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        .input-description {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>SpyConverter Test</h1>
+    
+    <div class="converter-section">
+        <h2>QQQ to NDX Conversion</h2>
+        <div class="input-group">
+            <textarea id="qqqToNdxInput" placeholder="Enter QQQ values (separated by commas, spaces, or dashes)"></textarea>
+            <div class="input-description">Examples: 450, 449, 448 or 450 449 448 or 450-449-448 or mix them: 450, 449 - 448</div>
+            <button onclick="convertQQQToNDX()">Convert</button>
+        </div>
+        <div class="result" id="qqqToNdxResult">
+            <table id="qqqToNdxTable">
+                <thead>
+                    <tr>
+                        <th>QQQ Value</th>
+                        <th>NDX Value</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="converter-section">
+        <h2>QQQ to NQ Conversion</h2>
+        <div class="input-group">
+            <textarea id="qqqToNqInput" placeholder="Enter QQQ values (separated by commas, spaces, or dashes)"></textarea>
+            <div class="input-description">Examples: 450, 449, 448 or 450 449 448 or 450-449-448 or mix them: 450, 449 - 448</div>
+            <button onclick="convertQQQToNQ()">Convert</button>
+        </div>
+        <div class="result" id="qqqToNqResult">
+            <table id="qqqToNqTable">
+                <thead>
+                    <tr>
+                        <th>QQQ Value</th>
+                        <th>NQ Value</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="converter-section">
+        <h2>NQ to QQQ Conversion</h2>
+        <div class="input-group">
+            <textarea id="nqToQqqInput" placeholder="Enter NQ values (separated by commas, spaces, or dashes)"></textarea>
+            <div class="input-description">Examples: 450, 449, 448 or 450 449 448 or 450-449-448 or mix them: 450, 449 - 448</div>
+            <button onclick="convertNQToQQQ()">Convert</button>
+        </div>
+        <div class="result" id="nqToQqqResult">
+            <table id="nqToQqqTable">
+                <thead>
+                    <tr>
+                        <th>NQ Value</th>
+                        <th>QQQ Value</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="converter-section">
+        <h2>NDX to QQQ Conversion</h2>
+        <div class="input-group">
+            <textarea id="ndxToQqqInput" placeholder="Enter NDX values (separated by commas, spaces, or dashes)"></textarea>
+            <div class="input-description">Examples: 450, 449, 448 or 450 449 448 or 450-449-448 or mix them: 450, 449 - 448</div>
+            <button onclick="convertNDXToQQQ()">Convert</button>
+        </div>
+        <div class="result" id="ndxToQqqResult">
+            <table id="ndxToQqqTable">
+                <thead>
+                    <tr>
+                        <th>NDX Value</th>
+                        <th>QQQ Value</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="converter-section">
+        <h2>ES to SPY Conversion</h2>
+        <div class="input-group">
+            <textarea id="esToSpyInput" placeholder="Enter ES values (separated by commas, spaces, or dashes)"></textarea>
+            <div class="input-description">Examples: 450, 449, 448 or 450 449 448 or 450-449-448 or mix them: 450, 449 - 448</div>
+            <button onclick="convertESToSPY()">Convert</button>
+        </div>
+        <div class="result" id="esToSpyResult">
+            <table id="esToSpyTable">
+                <thead>
+                    <tr>
+                        <th>ES Value</th>
+                        <th>SPY Value</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="converter-section">
+        <h2>SPY to ES Conversion</h2>
+        <div class="input-group">
+            <textarea id="spyToEsInput" placeholder="Enter SPY values (separated by commas, spaces, or dashes)"></textarea>
+            <div class="input-description">Examples: 450, 449, 448 or 450 449 448 or 450-449-448 or mix them: 450, 449 - 448</div>
+            <button onclick="convertSPYToES()">Convert</button>
+        </div>
+        <div class="result" id="spyToEsResult">
+            <table id="spyToEsTable">
+                <thead>
+                    <tr>
+                        <th>SPY Value</th>
+                        <th>ES Value</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="last-updated" id="lastUpdated">Last updated: Never</div>
+
+    <script src="spyconverter.js"></script>
+    <script>
+        const converter = new SpyConverter();
+
+        function updateLastUpdated() {
+            const now = new Date();
+            document.getElementById('lastUpdated').textContent = 
+                `Last updated: ${now.toLocaleString()}`;
+        }
+
+        // Parse input values from textarea
+        function parseInputValues(inputText) {
+            // Split by newlines first
+            return inputText
+                .split('\n')
+                .flatMap(line => {
+                    // For each line, split by dashes and handle each part
+                    return line.split('-').flatMap(part => {
+                        // Clean up the part and split by commas and/or spaces
+                        const numbers = part
+                            .trim()
+                            .split(/[,\s]+/)
+                            .map(num => num.trim())
+                            .filter(num => num !== '')
+                            .map(num => {
+                                // Remove any non-numeric characters except decimal point
+                                const cleanNum = num.replace(/[^\d.-]/g, '');
+                                return parseFloat(cleanNum);
+                            });
+                        return numbers;
+                    });
+                })
+                .filter(num => !isNaN(num));
+        }
+
+        // Generic conversion function
+        async function convert(inputId, tableId, conversionMethod) {
+            const input = document.getElementById(inputId);
+            const tableBody = document.querySelector(`#${tableId} tbody`);
+            const resultDiv = document.getElementById(inputId.replace('Input', 'Result'));
+            
+            try {
+                const values = parseInputValues(input.value);
+                if (values.length === 0) {
+                    throw new Error('Please enter at least one valid number');
+                }
+                
+                tableBody.innerHTML = '';
+                resultDiv.className = 'result';
+                
+                for (const value of values) {
+                    const result = await converter[conversionMethod](value);
+                    const row = tableBody.insertRow();
+                    row.insertCell(0).textContent = value.toFixed(2);
+                    row.insertCell(1).textContent = result.toFixed(2);
+                }
+                
+                updateLastUpdated();
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="error">Error: ${error.message}</div>`;
+                resultDiv.className = 'result error';
+            }
+        }
+
+        // Conversion functions
+        function convertQQQToNDX() {
+            convert('qqqToNdxInput', 'qqqToNdxTable', 'convertQQQToNDX');
+        }
+
+        function convertQQQToNQ() {
+            convert('qqqToNqInput', 'qqqToNqTable', 'convertQQQToNQ');
+        }
+
+        function convertNQToQQQ() {
+            convert('nqToQqqInput', 'nqToQqqTable', 'convertNQToQQQ');
+        }
+
+        function convertNDXToQQQ() {
+            convert('ndxToQqqInput', 'ndxToQqqTable', 'convertNDXToQQQ');
+        }
+
+        function convertESToSPY() {
+            convert('esToSpyInput', 'esToSpyTable', 'convertESToSPY');
+        }
+
+        function convertSPYToES() {
+            convert('spyToEsInput', 'spyToEsTable', 'convertSPYToES');
+        }
+
+        // Initialize last updated time
+        updateLastUpdated();
+    </script>
+</body>
+</html> 

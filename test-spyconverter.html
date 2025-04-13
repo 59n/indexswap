@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SpyConverter Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .test-container {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .success {
+            color: green;
+        }
+        .error {
+            color: red;
+        }
+        button {
+            padding: 8px 16px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        input {
+            padding: 8px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>SpyConverter Browser Test</h1>
+    
+    <div class="test-container">
+        <h2>Manual Test</h2>
+        <input type="number" id="testInput" placeholder="Enter QQQ value">
+        <button onclick="runManualTest()">Convert</button>
+        <p>Result: <span id="testResult">-</span></p>
+    </div>
+
+    <div class="test-container">
+        <h2>Automated Tests</h2>
+        <button onclick="runAutomatedTests()">Run All Tests</button>
+        <div id="automatedTestResults"></div>
+    </div>
+
+    <script src="spyconverter.js"></script>
+    <script>
+        const converter = new SpyConverter();
+        
+        async function runManualTest() {
+            const input = document.getElementById('testInput').value;
+            const resultSpan = document.getElementById('testResult');
+            
+            try {
+                resultSpan.textContent = 'Converting...';
+                const result = await converter.convertQQQToNDX(parseFloat(input));
+                resultSpan.textContent = result;
+                resultSpan.className = 'success';
+            } catch (error) {
+                resultSpan.textContent = 'Error: ' + error.message;
+                resultSpan.className = 'error';
+            }
+        }
+
+        async function runAutomatedTests() {
+            const resultsDiv = document.getElementById('automatedTestResults');
+            resultsDiv.innerHTML = '';
+            
+            const tests = [
+                { name: 'Basic conversion', input: 100 },
+                { name: 'Different value', input: 50 },
+                { name: 'Zero input', input: 0 },
+                { name: 'Large number', input: 1000 }
+            ];
+
+            for (const test of tests) {
+                const testDiv = document.createElement('div');
+                testDiv.innerHTML = `<h3>${test.name}</h3>`;
+                resultsDiv.appendChild(testDiv);
+
+                try {
+                    const result = await converter.convertQQQToNDX(test.input);
+                    testDiv.innerHTML += `
+                        <p>Input: ${test.input} QQQ</p>
+                        <p class="success">Output: ${result} NDX</p>
+                    `;
+                } catch (error) {
+                    testDiv.innerHTML += `
+                        <p>Input: ${test.input} QQQ</p>
+                        <p class="error">Error: ${error.message}</p>
+                    `;
+                }
+            }
+        }
+    </script>
+</body>
+</html> 

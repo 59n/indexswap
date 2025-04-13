@@ -1,0 +1,12 @@
+{
+  "name": "spyconverter",
+  "version": "1.0.0",
+  "description": "A module to convert QQQ to NDX values using spyconverter.com",
+  "main": "spyconverter.js",
+  "scripts": {
+    "test": "node test-spyconverter.js"
+  },
+  "dependencies": {
+    "puppeteer": "^21.0.0"
+  }
+} 
