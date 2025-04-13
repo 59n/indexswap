@@ -1,4 +1,4 @@
-# IndexSwap
+# IndexSwapy
 
 A powerful financial instrument converter for NDX, QQQ, NQ, SPY, and ES values. Convert between different index products with real-time ratios.
 
@@ -15,7 +15,7 @@ A powerful financial instrument converter for NDX, QQQ, NQ, SPY, and ES values. 
 
 ## Usage
 
-Visit: [indexswap.netlify.app](https://indexswap.netlify.app)
+Visit: [indexswapy.netlify.app](https://indexswapy.netlify.app)
 
 ### Input Formats
 
@@ -31,8 +31,8 @@ The converter accepts various input formats:
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/YOUR-USERNAME/indexswap.git
-cd indexswap
+git clone https://github.com/YOUR-USERNAME/indexswapy.git
+cd indexswapy
 ```
 
 2. Install dependencies:
@@ -53,7 +53,7 @@ npm test
 ## Project Structure
 
 ```
-indexswap/
+indexswapy/
 ├── src/               # Source files
 │   └── spyconverter.js
 ├── test/              # Test files

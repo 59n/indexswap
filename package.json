@@ -1,5 +1,5 @@
 {
-  "name": "indexswap",
+  "name": "indexswapy",
   "version": "1.0.0",
   "description": "Financial instrument converter for NDX, QQQ, NQ, SPY, and ES",
   "main": "src/spyconverter.js",
