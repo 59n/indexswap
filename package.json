@@ -7,6 +7,6 @@
     "test": "node test-spyconverter.js"
   },
   "dependencies": {
-    "puppeteer": "^21.0.0"
+    "puppeteer": "^24.6.1"
   }
 } 
