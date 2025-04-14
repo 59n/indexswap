@@ -1,4 +1,4 @@
-class SpyConverter {
+class IndexSwapy {
     constructor() {
         this.ratios = {
             ndx_qqq: 41.10241216829076,
@@ -10,7 +10,7 @@ class SpyConverter {
 
     async updateRatios() {
         try {
-            const response = await fetch('https://utility-trees-399601.wl.r.appspot.com/');
+            const response = await fetch('https://indexswapy-backend.netlify.app/');
             const data = await response.json();
             
             this.ratios = {
@@ -136,7 +136,7 @@ class SpyConverter {
 
 // Export the module
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = SpyConverter;
+    module.exports = IndexSwapy;
 } else {
-    window.SpyConverter = SpyConverter;
+    window.IndexSwapy = IndexSwapy;
 } 
