@@ -156,6 +156,24 @@
         footer small {
             font-size: 0.875rem;
         }
+
+        .footer-links {
+            margin: 1rem 0;
+        }
+        .footer-links a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        .footer-links a:hover {
+            color: var(--primary-hover);
+            text-decoration: underline;
+        }
+        .thank-you {
+            margin-top: 1rem;
+            font-style: italic;
+            color: #64748b;
+        }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
@@ -287,6 +305,11 @@
     <footer>
         <p>IndexSwap - A free tool for financial instrument conversion</p>
         <p><small>Version 1.0.0</small></p>
+        <div class="footer-links">
+            <a href="https://github.com/59n/indexswapy" target="_blank" rel="noopener noreferrer">Frontend Source Code</a> |
+            <a href="https://github.com/59n/indexswapy-backend" target="_blank" rel="noopener noreferrer">Backend Source Code</a>
+        </div>
+        <p class="thank-you">Thank you for using IndexSwap! We hope it helps with your financial calculations.</p>
     </footer>
 
     <script src="src/indexswapy.js"></script>
