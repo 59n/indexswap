@@ -1,4 +1,6 @@
 class IndexSwapy {
+    static VERSION = '1.0.0';
+    
     constructor() {
         this.ratios = {
             ndx_qqq: 41.10241216829076,
