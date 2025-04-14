@@ -1,10 +1,10 @@
-// Test file for SpyConverter
-const SpyConverter = require('./spyconverter');
+// Test file for IndexSwapy
+const IndexSwapy = require('../src/indexswapy');
 
 async function runTests() {
-    const converter = new SpyConverter();
+    const converter = new IndexSwapy();
     
-    console.log('Starting SpyConverter tests...\n');
+    console.log('Starting IndexSwapy tests...\n');
     
     const tests = [
         {
