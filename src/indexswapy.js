@@ -10,19 +10,28 @@ class IndexSwapy {
 
     async updateRatios() {
         try {
-            const response = await fetch('https://indexswapy-backend.netlify.app/');
+            console.log('Fetching ratios from backend...');
+            const response = await fetch('https://indexswapy-backend.netlify.app/.netlify/functions/indexswapy/api/ratios');
             const data = await response.json();
+            console.log('Backend response:', data);
             
-            this.ratios = {
-                ndx_qqq: data["NDX/QQQ Ratio"],
-                nq_qqq: data["NQ/QQQ Ratio"],
-                es_spy: data["ES/SPY Ratio"]
-            };
+            // Check if the response has the expected data
+            if (data.status === 'ok' && data.ratios) {
+                this.ratios = {
+                    ndx_qqq: data.ratios["NDX/QQQ Ratio"],
+                    nq_qqq: data.ratios["NQ/QQQ Ratio"],
+                    es_spy: data.ratios["ES/SPY Ratio"]
+                };
+                console.log('Updated ratios from backend:', this.ratios);
+            } else {
+                console.log('Using fallback ratios:', this.ratios);
+            }
             
             this.lastUpdated = new Date();
             return true;
         } catch (error) {
             console.error('Error updating ratios:', error);
+            console.log('Using fallback ratios:', this.ratios);
             return false;
         }
     }
@@ -41,6 +50,17 @@ class IndexSwapy {
         if (!this.lastUpdated || (Date.now() - this.lastUpdated.getTime() > 60000)) {
             await this.updateRatios();
         }
+
+        // Ensure we have valid ratios
+        if (isNaN(this.ratios.ndx_qqq)) {
+            throw new Error('Conversion ratio not available. Please try again later.');
+        }
+
+        console.log('Converting QQQ to NDX:', {
+            input: numValue,
+            ratio: this.ratios.ndx_qqq,
+            result: numValue * this.ratios.ndx_qqq
+        });
 
         // Perform the conversion
         const result = (numValue * this.ratios.ndx_qqq).toFixed(2);
