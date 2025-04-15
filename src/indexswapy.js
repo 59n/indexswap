@@ -3,9 +3,9 @@ class IndexSwapy {
     
     constructor() {
         this.ratios = {
-            ndx_qqq: 41.10241216829076,
-            nq_qqq: 41.29471200210854,
-            es_spy: 10.072138887159946
+            ndx_qqq: null,
+            nq_qqq: null,
+            es_spy: null
         };
         this.lastUpdated = null;
         this.lastApiCall = null;
@@ -38,17 +38,15 @@ class IndexSwapy {
                     es_spy: data.ratios["ES/SPY Ratio"]
                 };
                 console.log('Ratios updated:', this.ratios);
+                this.lastUpdated = new Date();
+                this.lastApiCall = now;
+                return true;
             } else {
-                console.log('Using fallback ratios');
+                throw new Error('Invalid response format from backend');
             }
-            
-            this.lastUpdated = new Date();
-            this.lastApiCall = now;
-            return true;
         } catch (error) {
             console.error('Error updating ratios:', error);
-            console.log('Using fallback ratios');
-            return false;
+            throw new Error('Failed to fetch ratios from backend. Please try again later.');
         }
     }
 
@@ -102,14 +100,9 @@ class IndexSwapy {
         // Input validation
         const numValue = this.validateInput(qqqValue);
 
-        // Try to update ratios if they're old or not set
-        if (!this.lastUpdated || (Date.now() - this.lastUpdated.getTime() > this.cacheDuration)) {
-            await this.updateRatios();
-        }
-
         // Ensure we have valid ratios
-        if (isNaN(this.ratios.ndx_qqq)) {
-            throw new Error('Conversion ratio not available. Please try again later.');
+        if (!this.ratios.ndx_qqq || !this.lastUpdated || (Date.now() - this.lastUpdated.getTime() > this.cacheDuration)) {
+            await this.updateRatios();
         }
 
         // Perform the conversion
@@ -125,7 +118,7 @@ class IndexSwapy {
     async _convertQQQToNQ(qqqValue) {
         const numValue = this.validateInput(qqqValue);
 
-        if (!this.lastUpdated || (Date.now() - this.lastUpdated.getTime() > this.cacheDuration)) {
+        if (!this.ratios.nq_qqq || !this.lastUpdated || (Date.now() - this.lastUpdated.getTime() > this.cacheDuration)) {
             await this.updateRatios();
         }
 
@@ -140,7 +133,7 @@ class IndexSwapy {
     async _convertNQToQQQ(nqValue) {
         const numValue = this.validateInput(nqValue);
 
-        if (!this.lastUpdated || (Date.now() - this.lastUpdated.getTime() > this.cacheDuration)) {
+        if (!this.ratios.nq_qqq || !this.lastUpdated || (Date.now() - this.lastUpdated.getTime() > this.cacheDuration)) {
             await this.updateRatios();
         }
 
@@ -155,7 +148,7 @@ class IndexSwapy {
     async _convertNDXToQQQ(ndxValue) {
         const numValue = this.validateInput(ndxValue);
 
-        if (!this.lastUpdated || (Date.now() - this.lastUpdated.getTime() > this.cacheDuration)) {
+        if (!this.ratios.ndx_qqq || !this.lastUpdated || (Date.now() - this.lastUpdated.getTime() > this.cacheDuration)) {
             await this.updateRatios();
         }
 
@@ -170,7 +163,7 @@ class IndexSwapy {
     async _convertESToSPY(esValue) {
         const numValue = this.validateInput(esValue);
 
-        if (!this.lastUpdated || (Date.now() - this.lastUpdated.getTime() > this.cacheDuration)) {
+        if (!this.ratios.es_spy || !this.lastUpdated || (Date.now() - this.lastUpdated.getTime() > this.cacheDuration)) {
             await this.updateRatios();
         }
 
@@ -185,7 +178,7 @@ class IndexSwapy {
     async _convertSPYToES(spyValue) {
         const numValue = this.validateInput(spyValue);
 
-        if (!this.lastUpdated || (Date.now() - this.lastUpdated.getTime() > this.cacheDuration)) {
+        if (!this.ratios.es_spy || !this.lastUpdated || (Date.now() - this.lastUpdated.getTime() > this.cacheDuration)) {
             await this.updateRatios();
         }
 
