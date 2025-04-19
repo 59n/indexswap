@@ -84,8 +84,3 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduc
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Acknowledgments
-
-* Thanks to all contributors who have helped improve this project
-* Special thanks to the open-source community for their tools and libraries 
